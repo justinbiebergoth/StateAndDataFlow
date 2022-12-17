@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var timer = TimeCounter()
     @EnvironmentObject private var userManager: UserManager
-    @AppStorage("userName") var = userManager.name
+//    @AppStorage("userName") var =
     var body: some View {
         VStack {
             Text("Hi, \(userManager.name)")

@@ -10,7 +10,7 @@ import SwiftUI
 struct RegisterView: View {
     @State private var name = ""
     @EnvironmentObject private var userManager: UserManager
-    @AppStorage(userManager.name) var name = ""
+//    @AppStorage(userManager.name) var name = ""
     @State private var isValid = false
     
     @State private var isVisible = false
