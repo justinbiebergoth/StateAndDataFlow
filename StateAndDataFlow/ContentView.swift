@@ -9,35 +9,48 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var timer = TimeCounter()
-    @EnvironmentObject private var userManager: UserManager
-//    @AppStorage("userName") var =
+//    @EnvironmentObject private var userManager: UserManager
+    @State var logout = false
+    
+    @AppStorage("user") var userName: String?
+    @AppStorage("isRegistered") var isRegistered: Bool?
+    
     var body: some View {
-        VStack {
-            Text("Hi, \(userManager.name)")
-                .font(.largeTitle)
-                .padding(.top, 100)
-            Text(timer.counter.formatted())
-                .font(.largeTitle)
-                .padding(.top, 100)
-            Spacer()
-            
-            ButtonView(timer: timer)
-            
-            Spacer()
-            
-            Button(action: {
+        if (logout) {
+            RegisterView()
+        } else {
+            VStack {
+                Text("Hi, \(userName ?? "")")
+                    .font(.largeTitle)
+                    .padding(.top, 100)
+                Text(timer.counter.formatted())
+                    .font(.largeTitle)
+                    .padding(.top, 100)
+                Spacer()
                 
-            }) {
-                Text("Log Out")
+                ButtonView(timer: timer)
+                
+                Spacer()
+                
+                Button(action: logOut) {
+                    Text("Log Out")
+                }
             }
         }
+        
+        }
+    private func logOut() {
+        self.logout = true
+        self.isRegistered?.toggle()
+        self.userName = ""
     }
 }
+    
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(UserManager())
+            
     }
 }
 

@@ -9,18 +9,17 @@ import SwiftUI
 
 struct RegisterView: View {
     @State private var name = ""
-    @EnvironmentObject private var userManager: UserManager
-//    @AppStorage(userManager.name) var name = ""
-//    @State private var isValid = false
-//    
-//    @State private var isVisible = false
+    @AppStorage("user") var userName = ""
+    @AppStorage("isRegistered") var isRegistered = false
     
     var body: some View {
         VStack {
             HStack {
                 TextField("Enter your name...", text: $name)
                     .multilineTextAlignment(.center)
+                    .padding(.leading, 35)
                 CounterView(name: $name)
+                    .foregroundColor(name.count < 3 ? .red : .green)
             }
             .padding()
             
@@ -29,19 +28,18 @@ struct RegisterView: View {
                     Image(systemName: "checkmark.circle")
                     Text("Ok")
                 }
-                .disabled( $name.wrappedValue.count < 3)
+                .disabled( name.count < 3)
             }
         }
     }
     
     private func registerUser() {
-            userManager.name = name
-//            userManager.name = user
-            userManager.isRegister.toggle()
+        userName = name
+        isRegistered.toggle()
         
     }
+    
 }
-
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
         RegisterView()
@@ -51,18 +49,15 @@ struct RegisterView_Previews: PreviewProvider {
 struct CounterView: View {
     @Binding var name: String
     var counter = 0
-    var color = Color(.red)
+
     
     init(name: Binding<String>) {
         self._name = name
         counter = _name.wrappedValue.count
-        if counter > 2 {
-            color = .green
-        }
     }
     
     var body: some View {
         Text("\(counter)")
-            .foregroundColor(color)
+
     }
 }
