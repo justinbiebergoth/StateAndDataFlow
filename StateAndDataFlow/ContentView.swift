@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var timer = TimeCounter()
-//    @EnvironmentObject private var userManager: UserManager
     @State var logout = false
     
     @AppStorage("user") var userName: String?
