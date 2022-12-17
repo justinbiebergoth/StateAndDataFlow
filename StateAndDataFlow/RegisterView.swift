@@ -11,9 +11,9 @@ struct RegisterView: View {
     @State private var name = ""
     @EnvironmentObject private var userManager: UserManager
 //    @AppStorage(userManager.name) var name = ""
-    @State private var isValid = false
-    
-    @State private var isVisible = false
+//    @State private var isValid = false
+//    
+//    @State private var isVisible = false
     
     var body: some View {
         VStack {
